@@ -39,6 +39,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>USchedule - Visualiza tu horario UTEC</title>
+</svelte:head>
+
 <div class="relative container mx-auto py-16 min-h-screen">
 	<h1 class="text-center text-5xl mb-4 font-black">USchedule</h1>
 
@@ -52,7 +56,8 @@
 			type="submit">Atrás</button
 		>
 	{:else}
-		<p class="text-center">Visualiza tus horarios de UTEC 👀</p>
+		<p class="text-center">Visualiza tu horario UTEC 👀</p>
+		<p class="font-light text-center">¿Cansado de hacer excels para tu horario? Prueba USchedule YA!</p>
 		<iframe
 			src="https://www.youtube.com/embed/DrUmQdL7z84"
 			title="USchedule D-E-M-O"
