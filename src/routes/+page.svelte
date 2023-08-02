@@ -56,25 +56,30 @@
 			type="submit">Atrás</button
 		>
 	{:else}
-		<p class="text-center">Visualiza tu horario UTEC 👀</p>
-		<p class="font-light text-center">¿Cansado de hacer excels para tu horario? Prueba USchedule YA!</p>
-		<iframe
-			src="https://www.youtube.com/embed/DrUmQdL7z84"
-			title="USchedule D-E-M-O"
-			frameborder="0"
-			class="mx-auto w-96 aspect-video my-4"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-			allowfullscreen
-		/>
+		<div class="max-w-lg mx-auto">
+			<p class="text-center">Visualiza tu horario UTEC 👀</p>
+			<p class="font-light text-center">
+				¿Cansado de hacer excels para tu horario? ¡Prueba USchedule YA! Una opción gráfica para
+				visualizar tu <span class="italic">carga hábil</span>
+			</p>
+			<iframe
+				src="https://www.youtube.com/embed/DrUmQdL7z84"
+				title="USchedule D-E-M-O"
+				frameborder="0"
+				class="w-full aspect-video my-4"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+				allowfullscreen
+			/>
 
-		<form
-			on:submit|preventDefault={handleSubmit}
-			class="flex flex-col items-center max-w-lg mx-auto space-y-2 mb-8"
-		>
-			<label for="text" class="text-center">Ctrl + v aquí 👇</label>
-			<textarea id="text" rows="10" bind:value={text} class="w-full" />
-			<button class="bg-green-500 w-full h-12" type="submit">Continuar</button>
-		</form>
+			<form
+				on:submit|preventDefault={handleSubmit}
+				class="flex flex-col items-center max-w-lg mx-auto space-y-2 mb-8"
+			>
+				<label for="text" class="text-center">Ctrl + v aquí 👇</label>
+				<textarea id="text" rows="10" bind:value={text} class="w-full" />
+				<button class="bg-green-500 w-full h-12" type="submit">Continuar</button>
+			</form>
+		</div>
 	{/if}
 
 	<a
