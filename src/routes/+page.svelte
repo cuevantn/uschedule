@@ -40,7 +40,7 @@
 </script>
 
 <div class="relative container mx-auto py-16 min-h-screen">
-	<h1 class="text-center text-3xl mb-4 font-black">USchedule</h1>
+	<h1 class="text-center text-5xl mb-4 font-black">USchedule</h1>
 
 	{#if courses}
 		<Schedule {courses} {min} {max} />
@@ -52,20 +52,22 @@
 			type="submit">Atrás</button
 		>
 	{:else}
-		<p class="font-thin text-center">¿Quieres VISUALIZAR tus posibles horarios de la UTEC?</p>
-		<p class="font-thin text-center">Ve a Sistema Académico -> Consultas -> Mi carga hábil</p>
-		<p class="font-thin text-center">Cosas, cosas, cosas...</p>
-		<p class="font-thin text-center mb-4">Pega la data aquí abajo:</p>
-		<p class="font-thin text-center mb-4">
-			Estoy trabajando en un video tutorial. Por mientras puedes ver mis horrib... digo posibles
-			horarios
-		</p>
+		<p class="text-center">Visualiza tus horarios de UTEC 👀</p>
+		<iframe
+			src="https://www.youtube.com/embed/DrUmQdL7z84"
+			title="USchedule D-E-M-O"
+			frameborder="0"
+			class="mx-auto w-96 aspect-video my-4"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+			allowfullscreen
+		/>
 
 		<form
 			on:submit|preventDefault={handleSubmit}
 			class="flex flex-col items-center max-w-lg mx-auto space-y-2 mb-8"
 		>
-			<textarea rows="10" bind:value={text} class="w-full" />
+			<label for="text" class="text-center">Ctrl + v aquí 👇</label>
+			<textarea id="text" rows="10" bind:value={text} class="w-full" />
 			<button class="bg-green-500 w-full h-12" type="submit">Continuar</button>
 		</form>
 	{/if}
