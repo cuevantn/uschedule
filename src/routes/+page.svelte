@@ -39,7 +39,7 @@
 	}
 </script>
 
-<div class="container mx-auto my-16">
+<div class="relative container mx-auto py-16 min-h-screen">
 	<h1 class="text-center text-3xl mb-4 font-black">USchedule</h1>
 
 	{#if courses}
@@ -69,4 +69,9 @@
 			<button class="bg-green-500 w-full h-12" type="submit">Continuar</button>
 		</form>
 	{/if}
+
+	<a
+		class="text-gray-600 absolute bottom-8 left-1/2 transform -translate-x-1/2"
+		href="https://github.com/cuevantn/uschedule">Check the source code on Github :)</a
+	>
 </div>
