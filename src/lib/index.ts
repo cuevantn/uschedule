@@ -18,7 +18,7 @@ export interface Section {
 export interface Course {
 	id: string;
 	name: string;
-	level: number;
+	level: number | null;
 	credits: number;
 	sections: Section[];
 }
@@ -34,7 +34,7 @@ function getCoursesICouldTake(input: any) {
 		courses.set(course_code, {
 			id: course_code,
 			name: raw_course.course,
-			level: raw_course.semester,
+			level: raw_course.semester === '-' ? null : parseInt(raw_course.semester),
 			credits: raw_course.credits,
 			sections: []
 		});

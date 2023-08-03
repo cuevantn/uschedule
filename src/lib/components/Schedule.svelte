@@ -85,9 +85,10 @@
 			{#each courses as course}
 				<li class="p-4 border-b last:border-b-0">
 					<p class="font-bold">{course.name}</p>
-					<div class="flex mb-2">
+					<div class="flex mb-2 space-x-2">
 						<p class="pr-2 border-r">{course.id}</p>
-						<p class="pl-2">{course.credits} créditos</p>
+						<p class="pr-2 border-r">{course.credits} créditos</p>
+						<p class="">{course.level ? `nivel ${course.level}` : 'electivo'}</p>
 					</div>
 					<p class="text-sm">Secciones:</p>
 					<div class="flex gap-2 flex-shrink">
