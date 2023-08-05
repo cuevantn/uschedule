@@ -25,11 +25,26 @@
 
 	let visibleSections = [courses[0].sections[0], courses[1].sections[0]];
 
+	interface x {
+		value: string;
+		sort: number;
+	}
+
 	let colors = Object.values(all_colors)
 		.filter((color) => typeof color === 'object')
-		.map((value) => ({ value, sort: Math.random() }))
-		.sort((a, b) => a.sort - b.sort)
-		.map(({ value }) => value);
+		.reduce((acc, color) => [...acc, color[400], color[600], color[800]], [])
+		.map((value: string) => ({ value, sort: Math.random() }))
+		.sort((a: x, b: x) => a.sort - b.sort)
+		.map(({ value }: x) => value);
+
+	$: console.log(colors);
+
+	function shuffleColors() {
+		colors = colors
+			.map((value: string) => ({ value, sort: Math.random() }))
+			.sort((a: x, b: x) => a.sort - b.sort)
+			.map(({ value }: x) => value);
+	}
 
 	function handleToggleSection(section_id: number, course_id: string) {
 		console.log(section_id, course_id);
@@ -63,7 +78,7 @@
 		let index = visibleSections.findIndex(
 			(section) => section.course === course_id && section.id === section_id
 		);
-		return colors[index][500];
+		return colors[index];
 	}
 
 	function getStyle(section_id: number, course_id: string): string {
@@ -93,7 +108,7 @@
 					<p class="text-sm">Secciones:</p>
 					<div class="flex gap-2 flex-shrink">
 						{#each course.sections as section}
-							{#key visibleSections}
+							{#key [visibleSections, colors]}
 								<button
 									on:click={() => handleToggleSection(section.id, course.id)}
 									class="border w-8 h-8"
@@ -107,6 +122,7 @@
 				</li>
 			{/each}
 		</ul>
+		<button on:click={shuffleColors}>New colors</button>
 	</div>
 
 	<div class="grid grid-cols-7 grow">
@@ -140,26 +156,28 @@
 					class="grid h-[48rem]"
 					style={`grid-template-rows: repeat(${max - min}, minmax(0, 1fr));`}
 				>
-					{#each visibleSections as section}
-						{#each section.classes.filter((_class) => _class.day === day.id) as _class}
-							{@const course = courses.find((course) => course.id === section.course)}
-							{@const color = getSectionColor(section.id, course?.id || '')}
+					{#key colors}
+						{#each visibleSections as section}
+							{#each section.classes.filter((_class) => _class.day === day.id) as _class}
+								{@const course = courses.find((course) => course.id === section.course)}
+								{@const color = getSectionColor(section.id, course?.id || '')}
 
-							{#if _class.duration > 1}
-								<LongClass
-									name={course?.name || ''}
-									course_id={course?.id || ''}
-									section={section.id}
-									start={_class.start - min + 1}
-									{color}
-									duration={_class.duration}
-									teacher={_class.teacher}
-								/>
-							{:else}
-								<ShortClass name={course?.name || ''} start={_class.start - min + 1} {color} />
-							{/if}
+								{#if _class.duration > 1}
+									<LongClass
+										name={course?.name || ''}
+										course_id={course?.id || ''}
+										section={section.id}
+										start={_class.start - min + 1}
+										{color}
+										duration={_class.duration}
+										teacher={_class.teacher}
+									/>
+								{:else}
+									<ShortClass name={course?.name || ''} start={_class.start - min + 1} {color} />
+								{/if}
+							{/each}
 						{/each}
-					{/each}
+					{/key}
 				</div>
 
 				<div class="w-full h-[1px] absolute top-0 bg-gray-200" />
